@@ -47,7 +47,7 @@ namespace WebStoreTerehin.Controllers
         public IActionResult EmployeeInfo(int id)
         {
             var employee = _Employees.FirstOrDefault(e=>e.Id==id);
-            if (employee == null)
+            if (employee is null)
                 return NotFound();
             return View(employee);
         }
