@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Cache;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreTerehin.Models;
 
@@ -45,6 +43,13 @@ namespace WebStoreTerehin.Controllers
         {
             var employees  = _Employees;
             return View(employees);
+        }
+        public IActionResult EmployeeInfo(int id)
+        {
+            var employee = _Employees.FirstOrDefault(e=>e.Id==id);
+            if (employee == null)
+                return NotFound();
+            return View(employee);
         }
     }
 }
