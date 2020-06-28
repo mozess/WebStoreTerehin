@@ -1,0 +1,21 @@
+﻿@model WebStoreTerehin.Models.Employee
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WebStore - Сотрудник:@Model.Surname @Model.Name @Model.Patronymic</title>
+</head>
+<body>
+    <h3>Сотрудник</h3>
+
+    <dl>
+        <dt>Принят на работу</dt>
+        <dd>@Model.DateOfEmployment</dd>
+    </dl>
+
+    <hr />
+    <p><a href="~/Home/Employees">К списку сотрудников</a></p>
+</body>
+</html>
