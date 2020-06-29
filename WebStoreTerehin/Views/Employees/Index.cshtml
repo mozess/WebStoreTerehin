@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<WebStoreTerehin.Models.Employee>
-
+<div class="container">
 <h3>Сотрудники</h3>
 <hr />
 <table class="table">
@@ -18,10 +18,11 @@
                 <td>@employee.Surname</td>
                 <td>@employee.Patronymic</td>
                 <td>@employee.Age</td>
-                <td><a href="~/Home/EmployeeInfo/@employee.Id">Информация</a></td>
+                <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">Информация</a></td>
             </tr>
         }
     </tbody>
 </table>
 <hr />
 <a href="~/">На главную</a>
+</div>
