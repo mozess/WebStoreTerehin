@@ -26,5 +26,7 @@ namespace WebStoreTerehin.Controllers
 
         public IActionResult Shop() => View();
 
+        public IActionResult Error404() => View();
+
     }
 }
