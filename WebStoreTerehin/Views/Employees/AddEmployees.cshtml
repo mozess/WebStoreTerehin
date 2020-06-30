@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebStoreTerehin.Models.Employee>
+
+    <div class="container">
+        <h3>Добавление сотрудников</h3>
+        <form>
+            <p>Фамилия:</p>
+            <p><input name="surname"></p>
+            <p>Имя:</p>
+            <p><input name="name"></p>
+            <p>Отчество:</p>
+            <p><input name="patronymic"></p>
+            <p>Возраст:</p>
+            <p><input name="age"></p>
+            <p>Принят на работу(например 01.01.2000):</p>
+            <p><input name="employment"></p>
+
+            <p><input type="submit" value="Добавить" 
+                      asp-controller="Employees" 
+                      asp-action="AddEmp" 
+                      asp-route-surname={surname} 
+                      asp-route-name={name} 
+                      asp-route-patronymic={patronymic}
+                      asp-route-age={age} 
+                      asp-route-employment={employment} ></p>
+        </form>
+
+        <a asp-controller="Home" asp-action="Index">На главную</a>
+    </div>
