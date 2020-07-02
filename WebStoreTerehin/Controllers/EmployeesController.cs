@@ -6,6 +6,7 @@ using WebStoreTerehin.Models;
 
 namespace WebStoreTerehin.Controllers
 {
+    //[Route("Users")]
     public class EmployeesController : Controller
     {
         private static readonly List<Employee> _Employees = new List<Employee>
@@ -38,11 +39,13 @@ namespace WebStoreTerehin.Controllers
                 DateOfEmployment=Convert.ToDateTime("01.01.2020")
             },
         };
-        public IActionResult Index()=> View(_Employees);
 
+        //[Route("All")]
+        public IActionResult Index()=> View(_Employees);
+       
         public IActionResult AddEmployees() => View();
 
-
+        //[Route("User-{id}")]
         public IActionResult Details(int id)
         {
             var employee = _Employees.FirstOrDefault(e => e.Id == id);
