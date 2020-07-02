@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections;
+using WebStoreTerehin.Controllers.Infrastructure.Interfaces;
 using WebStoreTerehin.Controllers.Infrastructure.Middleware;
+using WebStoreTerehin.Controllers.Infrastructure.Services;
 
 namespace WebStoreTerehin
 {
@@ -22,6 +25,8 @@ namespace WebStoreTerehin
                 //opt.Filters.Add<Filter>();
                 //opt.Conventions.Add(); // ƒобавление/изменение соглашений MVC-приложени€
             }).AddRazorRuntimeCompilation();
+
+            services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
