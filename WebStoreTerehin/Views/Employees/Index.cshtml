@@ -2,6 +2,7 @@
 <div class="container">
 <h3>Сотрудники</h3>
 <hr />
+    <a asp-action="Edit" class="btn btn-primary">Новый сотрудник</a>
 <table class="table">
     <tr>
         <th>Id</th>
@@ -11,6 +12,7 @@
         <th>Возраст</th>
         <th>Доп информация</th>
         <th>Удаление</th>
+        <th>EDIT</th>
     </tr>
     </thead>
     <tbody>
@@ -22,8 +24,9 @@
             <td>@employee.Surname</td>
             <td>@employee.Patronymic</td>
             <td>@employee.Age</td>
-            <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">Информация</a></td>
-            <td><a asp-controller="Employees" asp-action="DeleteEmployees" asp-route-id="@employee.Id">Удалить сотрудника</a></td>
+            <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">Инф.</a></td>
+            <td><a asp-controller="Employees" asp-action="DeleteEmployees" asp-route-id="@employee.Id">Мое удал.</a></td>
+            <td><a asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.Id">Edit</a></td>
         </tr>
         }
     </tbody>
