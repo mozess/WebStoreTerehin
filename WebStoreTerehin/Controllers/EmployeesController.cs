@@ -80,6 +80,7 @@ namespace WebStoreTerehin.Controllers
         }
         #endregion
 
+        #region Delete
         public IActionResult Delete(int id)
         {
             if (id <= 0)
@@ -99,6 +100,16 @@ namespace WebStoreTerehin.Controllers
                 DateOfEmployment = employee.DateOfEmployment
             });
         }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _EmployeesData.Delete(id);
+            _EmployeesData.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
 
         public IActionResult DeleteEmployees(int id)
         {
