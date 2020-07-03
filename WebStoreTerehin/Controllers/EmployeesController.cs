@@ -5,6 +5,8 @@ using WebStoreTerehin.Controllers.Infrastructure.Interfaces;
 using WebStoreTerehin.Data;
 using WebStoreTerehin.Models;
 using WebStoreTerehin.ViewModels;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebStoreTerehin.Controllers
 {
@@ -42,7 +44,6 @@ namespace WebStoreTerehin.Controllers
             if (employee is null)
                 return NotFound();
 
-
             return View(new EmployeesViewModel
             {
                 Id = employee.Id,
@@ -58,6 +59,30 @@ namespace WebStoreTerehin.Controllers
         {
             if (Model is null)
                 throw new ArgumentNullException(nameof(Model));
+
+            //Валидация
+
+            Regex rgx = new Regex(@"^[А-Я]{1}([а-я])+$");
+            if (Model.LastName is null)
+                ModelState.AddModelError("LastName", "Заполните поле Фамилия");
+            else if (!rgx.IsMatch(Model.LastName))
+                ModelState.AddModelError("LastName", "Недопустимые символы в поле Фамилия");
+
+            if (Model.FirstName is null)
+                ModelState.AddModelError("FirstName", "Заполните поле Имя");
+            else if (!rgx.IsMatch(Model.FirstName))
+                ModelState.AddModelError("FirstName", "Недопустимые символы в поле Имя");
+
+            if (Model.Patronymic is null)
+                ModelState.AddModelError("Patronymic", "Заполните поле Отчество");
+            else if (!rgx.IsMatch(Model.Patronymic))
+                ModelState.AddModelError("Patronymic", "Недопустимые символы в поле Отчество");
+
+            if (Model.Age < 16 | Model.Age > 100)
+                ModelState.AddModelError("Age", "Возраст указан не верно");
+
+            if (!ModelState.IsValid)
+                return View(Model);
 
             var employee = new Employee
             {

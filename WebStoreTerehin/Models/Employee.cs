@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace WebStoreTerehin.Models
 {
     public class Employee
