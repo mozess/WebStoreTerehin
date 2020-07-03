@@ -29,6 +29,7 @@ namespace WebStoreTerehin.Controllers
             return View(employee);
         }
 
+        #region Edit
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -55,9 +56,49 @@ namespace WebStoreTerehin.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeesViewModel Model)
         {
+            if (Model is null)
+                throw new ArgumentNullException(nameof(Model));
+
+            var employee = new Employee
+            {
+                Id = Model.Id,
+                Surname = Model.LastName,
+                Name = Model.FirstName,
+                Patronymic = Model.Patronymic,
+                Age = Model.Age,
+                DateOfEmployment = Model.DateOfEmployment
+            } ;
+
+            if (Model.Id == 0)
+                _EmployeesData.Add(employee);
+            else
+                _EmployeesData.Edit(employee);
+
+            _EmployeesData.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            var employee = _EmployeesData.GetById(id);
+            if (employee is null)
+                return NotFound();
+
+            return View(new EmployeesViewModel
+            {
+                Id = employee.Id,
+                FirstName = employee.Name,
+                LastName = employee.Surname,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age,
+                DateOfEmployment = employee.DateOfEmployment
+            });
+        }
 
         public IActionResult DeleteEmployees(int id)
         {
