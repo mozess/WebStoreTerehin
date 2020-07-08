@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections;
+using WebStoreTerehin.Controllers.Infrastructure.Interfaces;
+using WebStoreTerehin.Controllers.Infrastructure.Middleware;
+using WebStoreTerehin.Controllers.Infrastructure.Services;
 
 namespace WebStoreTerehin
 {
@@ -16,7 +20,13 @@ namespace WebStoreTerehin
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews(opt =>
+            {
+                //opt.Filters.Add<Filter>();
+                //opt.Conventions.Add(); // Добавление/изменение соглашений MVC-приложения
+            }).AddRazorRuntimeCompilation();
+
+            services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,6 +40,17 @@ namespace WebStoreTerehin
             app.UseDefaultFiles();
 
             app.UseRouting();
+
+            app.UseWelcomePage("/welcome");
+
+            //app.Use(async (context, next) =>
+            //{
+            //    //Действия над context до следующего элемента в контейнере
+            //    await next(); //Вызов следующего промежуточного ПО в контейнере
+            //    //Действия над context после следующего элемента в контейнере
+            //});
+
+            //app.UseMiddleware<TestMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

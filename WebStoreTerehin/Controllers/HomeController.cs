@@ -10,6 +10,9 @@ namespace WebStoreTerehin.Controllers
     {
         public IActionResult Index() => View();
 
+        public IActionResult Throw(string id) => 
+            throw new ApplicationException($"Исключение: {id ?? "<null>"}");
+
         public IActionResult Blogs() => View();
 
         public IActionResult BlogSingle() => View();
